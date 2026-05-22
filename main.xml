@@ -10,13 +10,13 @@
             <default>true</default>
         </entry>
         <entry name="cryptoList" type="String">
-            <default>BTC,ETH</default>
+            <default>XMR,BTC,LTC,SOL,TAO,ETH,XRP</default>
         </entry>
         <entry name="updateInterval" type="Int">
             <default>60</default>
         </entry>
         <entry name="customTitle" type="String">
-            <default>My Cryptonite</default>
+            <default>Cryptocurrencies</default>
         </entry>
         <entry name="headerColor" type="String">
             <default>white</default>
