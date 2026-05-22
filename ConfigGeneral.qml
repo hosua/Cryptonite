@@ -13,6 +13,9 @@ Item {
     //Property-Aliases
     property alias cfg_enableTransparency: transparencyCheckbox.checked
     property alias cfg_showCoinPricesOnly: showCoinPricesOnlyCheckbox.checked
+    property alias cfg_showAsGrid: showAsGridCheckbox.checked
+    property alias cfg_gridColumns: gridColumnsField.value
+    property alias cfg_smartGrid: smartGridCheckbox.checked
     property alias cfg_cryptoList: cryptoListField.text
     property alias cfg_updateInterval: updateIntervalField.value
     property alias cfg_customTitle: customTitleField.text
@@ -40,6 +43,39 @@ Item {
                 id: showCoinPricesOnlyCheckbox
                 text: i18n("Show Coin Prices Only")
                 Kirigami.FormData.label: i18n("Display:")
+            }
+
+            CheckBox {
+                id: showAsGridCheckbox
+                text: i18n("Show as Grid")
+                Kirigami.FormData.label: i18n("Grid:")
+                enabled: showCoinPricesOnlyCheckbox.checked
+            }
+
+            CheckBox {
+                id: smartGridCheckbox
+                text: i18n("Smart Grid")
+                Kirigami.FormData.label: ""
+                enabled: showCoinPricesOnlyCheckbox.checked && showAsGridCheckbox.checked
+            }
+
+            Label {
+                text: i18n("Columns are automatically determined by the width of the widget")
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+                font.italic: true
+                Kirigami.FormData.label: ""
+                enabled: showCoinPricesOnlyCheckbox.checked && showAsGridCheckbox.checked
+                opacity: enabled ? 0.7 : 0.35
+            }
+
+            SpinBox {
+                id: gridColumnsField
+                Kirigami.FormData.label: i18n("Columns:")
+                from: 1
+                to: 10
+                visible: showCoinPricesOnlyCheckbox.checked && showAsGridCheckbox.checked && !smartGridCheckbox.checked
+                enabled: visible
             }
 
             TextField {
@@ -233,6 +269,9 @@ Item {
         // Konfiguration laden
         transparencyCheckbox.checked = plasmoid.configuration.enableTransparency;
         showCoinPricesOnlyCheckbox.checked = plasmoid.configuration.showCoinPricesOnly;
+        showAsGridCheckbox.checked = plasmoid.configuration.showAsGrid;
+        smartGridCheckbox.checked = plasmoid.configuration.smartGrid;
+        gridColumnsField.value = plasmoid.configuration.gridColumns || 2;
         customTitleField.text = plasmoid.configuration.customTitle || i18n("My Cryptonite");
         cryptoListField.text = plasmoid.configuration.cryptoList || "BTC,ETH";
         updateIntervalField.value = plasmoid.configuration.updateInterval || 60;
