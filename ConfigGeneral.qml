@@ -12,6 +12,7 @@ Item {
 
     //Property-Aliases
     property alias cfg_enableTransparency: transparencyCheckbox.checked
+    property alias cfg_showCoinPricesOnly: showCoinPricesOnlyCheckbox.checked
     property alias cfg_cryptoList: cryptoListField.text
     property alias cfg_updateInterval: updateIntervalField.value
     property alias cfg_customTitle: customTitleField.text
@@ -33,6 +34,12 @@ Item {
                 id: transparencyCheckbox
                 text: i18n("Enable transparency")
                 Kirigami.FormData.label: i18n("Background:")
+            }
+
+            CheckBox {
+                id: showCoinPricesOnlyCheckbox
+                text: i18n("Show Coin Prices Only")
+                Kirigami.FormData.label: i18n("Display:")
             }
 
             TextField {
@@ -225,6 +232,7 @@ Item {
     Component.onCompleted: {
         // Konfiguration laden
         transparencyCheckbox.checked = plasmoid.configuration.enableTransparency;
+        showCoinPricesOnlyCheckbox.checked = plasmoid.configuration.showCoinPricesOnly;
         customTitleField.text = plasmoid.configuration.customTitle || i18n("My Cryptonite");
         cryptoListField.text = plasmoid.configuration.cryptoList || "BTC,ETH";
         updateIntervalField.value = plasmoid.configuration.updateInterval || 60;

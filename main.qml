@@ -20,7 +20,7 @@ PlasmoidItem {
 
     fullRepresentation: Item {
         width: 400
-        height: cryptoEngine.cryptoData ? Object.keys(cryptoEngine.cryptoData).length * 80 + 150 : 250
+        height: cryptoEngine.cryptoData ? Object.keys(cryptoEngine.cryptoData).length * 80 + (plasmoid.configuration.showCoinPricesOnly ? 50 : 150) : 250
 
         // Transparenter Hintergrund Container
         Rectangle {
@@ -48,7 +48,7 @@ PlasmoidItem {
             // Liste der Kryptowährungen mit Portfolio-Informationen
             ListView {
                 width: parent.width
-                height: parent.height - 150
+                height: parent.height - (plasmoid.configuration.showCoinPricesOnly ? 50 : 150)
                 model: Object.keys(cryptoEngine.cryptoData)
                 delegate: Item {
                     width: ListView.view.width
@@ -92,7 +92,7 @@ PlasmoidItem {
                         Column {
                             width: parent.width * 0.4
                             padding: 5
-                            visible: cryptoEngine && cryptoEngine.userHoldings && cryptoEngine.userHoldings[modelData]
+                            visible: !plasmoid.configuration.showCoinPricesOnly && cryptoEngine && cryptoEngine.userHoldings && cryptoEngine.userHoldings[modelData]
 
                             Text {
                                 text: "My Value: $" + (cryptoEngine.userHoldings && cryptoEngine.userHoldings[modelData] ?
@@ -141,12 +141,14 @@ PlasmoidItem {
                 height: 1
                 color: plasmoid.configuration.headerColor || PlasmaCore.Theme.textColor
                 opacity: 0.5
+                visible: !plasmoid.configuration.showCoinPricesOnly
             }
 
             // Portfolio-Zusammenfassung mit Zeilenumbruch
             Column {
                 width: parent.width
                 spacing: 5
+                visible: !plasmoid.configuration.showCoinPricesOnly
 
                 Text {
                     text: "Total Value: $" + (cryptoEngine.totalCurrentValue || 0).toFixed(2)

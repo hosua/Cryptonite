@@ -1,0 +1,19 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "",
+                "Name": "SonnyDee1"
+            }
+        ],
+        "Category": "Online Services",
+        "Description": "Cryptocurrency Tracker Widget for KDE Plasma",
+        "Icon": "utilities-finance",
+        "Id": "org.kde.plasma.cryptonite",
+        "License": "GPL-2.0-or-later",
+        "Name": "Cryptonite",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
